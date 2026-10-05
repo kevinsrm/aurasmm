@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Setting extends Model
+{
+    protected $fillable = [
+        'key',
+        'value'
+    ];
+
+    public static function get($key, $default = null)
+    {
+        try {
+            $setting = self::where('key', $key)->first();
+            return $setting ? $setting->value : $default;
+        } catch (\Exception $e) {
+            return $default;
+        }
+    }
+
+    public static function set($key, $value)
+    {
+        self::updateOrCreate(['key' => $key], ['value' => $value]);
+    }
+}

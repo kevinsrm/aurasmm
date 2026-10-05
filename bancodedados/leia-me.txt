@@ -1,0 +1,76 @@
+===================================================================
+ GUIA DE INSTALAÇÃO E HOSPEDAGEM - PAINEL SMM AURA
+===================================================================
+
+Parabéns pela aquisição do código-fonte do AuraSMM! Este guia foi 
+elaborado para orientá-lo passo a passo sobre como colocar o seu painel 
+no ar de forma rápida e segura.
+
+-------------------------------------------------------------------
+ 1. QUAIS HOSPEDAGENS SÃO COMPATÍVEIS?
+-------------------------------------------------------------------
+Este projeto foi desenvolvido em **Laravel (PHP v11)**. Para que ele 
+funcione perfeitamente, a sua hospedagem precisa atender aos seguintes 
+requisitos mínimos:
+- **PHP versão:** 8.2 ou superior (Recomendado: PHP 8.2 ou 8.3)
+- **Extensões PHP obrigatórias:** OpenSSL, PDO, Mbstring, Tokenizer, XML, Ctype, JSON, BCMath.
+- **Banco de Dados:** MySQL ou MariaDB.
+- **Acesso:** Gerenciador de Arquivos e phpMyAdmin (cPanel, CyberPanel, Hostinger/hPanel, Plesk, etc.).
+
+**Hospedagens recomendadas:**
+1. **Hostinger (Plano Business ou Cloud):** Excelente custo-benefício, suporte a Composer e fáceis gerenciadores de arquivos.
+2. **cPanel (Bluehost, HostGator, etc.):** Hospedagens tradicionais com cPanel que possuam suporte a PHP atualizado.
+3. **VPS (DigitalOcean, AWS, Linode, Hostinger VPS):** Ideal para alto desempenho e tráfego intenso.
+
+*(Nota: Evite hospedagens compartilhadas muito antigas que rodam PHP 7.x ou que não permitem alterar a versão do PHP para 8.2+).*
+
+
+-------------------------------------------------------------------
+ 2. COMO SUBIR O ARQUIVO ZIP NA HOSPEDAGEM (PASSO A PASSO)
+-------------------------------------------------------------------
+
+Passo 1: Criar o Domínio / Subdomínio
+- Acesse o painel da sua hospedagem (ex: cPanel ou hPanel).
+- Vá em "Gerenciador de Domínios" ou "Subdomínios" e crie o endereço onde o painel vai rodar (ex: `painel.seudominio.com`).
+- Aponte a pasta raiz do domínio para a pasta pública do projeto: **`public_html/public`** (ou `seudominio.com/public`). *Atenção: apontar para a pasta `public` é fundamental para a segurança do Laravel.*
+
+Passo 2: Enviar o Arquivo ZIP
+- Entre no **Gerenciador de Arquivos** da hospedagem na pasta raiz do seu site.
+- Faça o upload do arquivo compactado (`.zip`) contendo o código-fonte do AuraSmm.
+- Extraia (descompacte) o arquivo ZIP diretamente na pasta raiz. Certifique-se de que todos os arquivos e pastas (como `app`, `config`, `public`, `storage`, `vendor`) apareceram corretamente.
+
+Passo 3: Configurar o Arquivo `.env`
+- Na pasta principal do projeto, procure o arquivo `.env.example` (ou crie um arquivo chamado `.env`).
+- Abra o arquivo `.env` para edição e configure as credenciais do seu banco de dados e da API:
+
+  ```env
+  APP_NAME=AuraSMM
+  APP_ENV=production
+  APP_DEBUG=false
+  APP_URL=https://seudominio.com
+
+  DB_CONNECTION=mysql
+  DB_HOST=127.0.0.1
+  DB_PORT=3306
+  DB_DATABASE=nome_do_seu_banco
+  DB_USERNAME=usuario_do_banco
+  DB_PASSWORD=senha_do_banco
+  ```
+
+Passo 4: Importar o Banco de Dados
+- No painel da hospedagem, acesse o **phpMyAdmin**.
+- Crie um novo banco de dados vazio (com cotejamento `utf8mb4_unicode_ci`).
+- Clique na aba **Importar**, selecione o arquivo `aurasmm.sql` que está dentro da pasta `bancodedados/` e clique em "Executar".
+
+Passo 5: Permissões de Pastas (Storage e Bootstrap)
+- Garanta que as pastas `storage/` e `bootstrap/cache/` tenham permissão de escrita (geralmente permissão `755` ou `777` dependendo do servidor).
+
+-------------------------------------------------------------------
+ 3. PRIMEIRO ACESSO E SUPORTE
+-------------------------------------------------------------------
+- Acesse o seu domínio no navegador.
+- O painel já estará pronto para uso.
+- O email Admin é admin@eu.com e a senha é 12345678
+- Cadastre sua chave de API da SMMHub e configure suas credenciais do Mercado Pago diretamente no painel de Administração.
+
+Em caso de dúvidas na instalação, consulte a documentação oficial do Laravel ou entre em contato com o suporte da sua hospedagem. Bons negócios!
