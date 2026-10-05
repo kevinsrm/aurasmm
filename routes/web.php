@@ -56,5 +56,6 @@ Route::middleware(['auth'])->group(function () {
         
         Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
         Route::post('/settings', [AdminController::class, 'updateSettings'])->name('admin.settings.update');
+        Route::get("/migrate", function(){return \Artisan::call('migrate')});
     });
 });
